@@ -2,9 +2,9 @@ const User = require('../models/User');
 const { mongoosetoObject, mutipleMongoosetoObject } = require('../../util/mongoose');
 const { use } = require('../../routes/me');
 const Jimp = require('jimp')
-var passport = require('passport');// Import thư viện passport
-require('../../config/token/Passport')(passport); // Gọi hàm khởi tạo passport với tham số là passport
-var jwt = require('jsonwebtoken');// Import thư viện jsonwebtoken (JWT)
+var passport = require('passport');
+require('../../config/token/Passport')(passport); 
+var jwt = require('jsonwebtoken');
 const session = require('express-session');
 
 class AuthContoller {

@@ -1,11 +1,8 @@
-// const express=require('express');
-// const router=express.Router();
+
 const multer=require('multer')
 const upload = multer({ dest: 'uploads/' });
  const authContoller=require('../app/controllers/AuthContoller');
-// //MeContoller.index
-// router.get('/login',authContoller.login);
-// //router.get('/signup',authContoller.signup);
+
 
 // module.exports=router;
 const express = require('express');
@@ -17,9 +14,9 @@ const bodyParser = require("body-parser")// Import thư viện body-parser để
 // Parse các request có content-type là application/json
 router.use(bodyParser.json());
 
-const parser = bodyParser.urlencoded({ extended: true }); // Parse các request có content-type là application/x-www-form-urlencoded
+const parser = bodyParser.urlencoded({ extended: true }); 
 
-router.use(parser); // Sử dụng body-parser để parse request có content-type là application/x-www-form-urlencoded
+router.use(parser); 
 
 
 // GET login page

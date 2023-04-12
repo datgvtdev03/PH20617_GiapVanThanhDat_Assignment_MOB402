@@ -8,21 +8,13 @@ const upload = multer({ dest: 'uploads/' });
 const apiRouter=require('./api')
 
 function route(app) { 
-  // app.use(function(req, res, next) {
-  //   const currentUser = req.cookies['data-user'];
-  //   res.locals.currentUser = currentUser;
-  //   next();
-  // });
+ 
   app.use('/api',apiRouter)
   app.use('/me',meRouter)
   app.use('/courses',courseRouter)
   app.use('/news', newsRouter);
   app.use('/authtification',authRouter)
   app.use('/',siteRouter);
-  // app.post('/upload', upload.single('img'), (req, res) => {
-  //   console.log(req.img);
-  //   res.send('img uploaded!');
-  // });
 }
 
 module.exports = route;

@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const slug=require('mongoose-slug-generator');
 const mongooseDelete = require('mongoose-delete');
 
-
 const Course = new Schema({
   name: {type:String,required:true},
   desc: {type:String},

@@ -55,6 +55,7 @@ class CourseContoller {
     product.name=name
     product.desc=desc
     product.price=price
+    
     if(req.hasOwnProperty('file') && req.file !==null){
       const imgPath=req.file.path
       const img=await Jimp.read(imgPath)
@@ -94,18 +95,3 @@ handleFormActions(req,res,next){
 
 module.exports = new CourseContoller();
 
-//middleware
-//ý nghĩa
-//phần mềm trung gian (đứng giữa các thành phần trong phần mềm)
-//sau route thì tất cả tham số đều là middleware
-//vai trò
-//giống như bác bảo vệ
-//1.kiểm soát (validate)
-//2.cho phép vào (validation passed -> cho vao)
-//3. không cho vào
-//4. chỉnh sửa / thay đổi
-//browser(client) <>=======req======== middleware(có thể có nhiều lớp) :server(node)
-                                           //^  
-//browser(client) <>========res=======server(node)
-//ung dung: làm chức năng xác thực và phân quyền
-//chia sẻ các giá trị của biến tới tất cả các view;

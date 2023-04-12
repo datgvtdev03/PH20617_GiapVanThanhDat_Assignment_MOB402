@@ -5,7 +5,6 @@ const upload = multer({ dest: 'uploads/' });
 
 
 const courseContoller=require('../app/controllers/CourseContoller');
-//CourseContoller.index
 router.post('/handle-form-actions',courseContoller.handleFormActions)
 router.get('/create',courseContoller.create);
 router.post('/store', upload.single('img'),courseContoller.store);

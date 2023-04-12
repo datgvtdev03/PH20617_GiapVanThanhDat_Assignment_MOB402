@@ -4,7 +4,7 @@ const SortMiddleware=require('./app/middleware/SortMiddleware')
 const methodOverride=require('method-override')
 var path=require('path')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const route=require('./routes')
 const db=require('./config/db/index')
 const session = require('express-session');
@@ -14,6 +14,10 @@ const jwt = require('jsonwebtoken');
 const checkTokenMiddleware=require('./app/middleware/checkTokenMiddleware')
 const checkAdminRole=require('./app/middleware/checkAdminRole')
 
+//api mobile
+const apiMobile = require('../src/routes/apiMobile')
+app.use('/api',apiMobile)
+
 //connect db
 db.connect();
 
@@ -22,7 +26,6 @@ app.use(session({
   secret: 'nodeauthsecret', // Khóa bí mật để mã hóa session
   resave: false, // Không lưu lại session nếu không có thay đổi
   saveUninitialized: false, // Không lưu lại session chưa được khởi tạo
-  // ...các tùy chọn khác...
 }));
 
 
@@ -31,6 +34,7 @@ app.use(compression());
 app.use(methodOverride('_method'));
 //custom middleware
 app.use(SortMiddleware);
+
 //use body
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -47,9 +51,7 @@ app.use((req, res, next) => {
   // Kiểm tra xem người dùng đã đăng nhập hay chưa
   if (req.session && req.session.token) {
     try {
-      // Giải mã token để lấy thông tin user
       const decoded = jwt.verify(req.session.token, 'nodeauthsecret');
-      //req.user = decoded; // Lưu thông tin user vào req.user
       res.locals.user=decoded
     } catch (err) {
       console.error(err);
@@ -58,7 +60,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware
 
 
 // Template engine
@@ -69,7 +70,6 @@ app.engine('hbs', engine({
        a === b;
     },
     
-    //role:()=>res.locals.role,
     user:()=> res.locals.user,
     isAllow: () => res.locals.isAllow,
     sum: (a,b)=>a+b,
